@@ -2,6 +2,10 @@
 
 Minimal terminal UI framework with differential rendering and synchronized output for flicker-free interactive CLI applications.
 
+## Design Docs
+
+- [Browser rendering design](./docs/browser-design.md)
+
 ## Features
 
 - **Differential Rendering**: Three-strategy rendering system that only updates what changed
