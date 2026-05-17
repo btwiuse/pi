@@ -3,6 +3,8 @@ interface ProcessLike {
 	nextTick?: (callback: () => void) => void;
 }
 
+const fallbackNowOrigin = Date.now();
+
 function getProcessLike(): ProcessLike | undefined {
 	return (globalThis as typeof globalThis & { process?: ProcessLike }).process;
 }
@@ -24,5 +26,5 @@ export function now(): number {
 	if (typeof performance !== "undefined" && typeof performance.now === "function") {
 		return performance.now();
 	}
-	return Date.now();
+	return Date.now() - fallbackNowOrigin;
 }

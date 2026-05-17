@@ -84,10 +84,9 @@ class BrowserXtermTerminal implements Terminal {
 	setProgress(_active: boolean): void {}
 }
 
-const transcriptLines = [
-	"assistant: Welcome to the pi-tui browser demo.",
-	"assistant: Type a message and press Enter. Use /clear to reset the transcript.",
-];
+const welcomeMessage = "assistant: Welcome to the pi-tui browser demo.";
+const defaultPrompt = "assistant: Type a message and press Enter. Use /clear to reset the transcript.";
+const transcriptLines = [welcomeMessage, defaultPrompt];
 
 const app = document.querySelector<HTMLDivElement>("#app");
 
@@ -159,12 +158,7 @@ input.onSubmit = (value) => {
 	}
 
 	if (trimmed === "/clear") {
-		transcriptLines.splice(
-			0,
-			transcriptLines.length,
-			"assistant: Welcome to the pi-tui browser demo.",
-			"assistant: The transcript was cleared.",
-		);
+		transcriptLines.splice(0, transcriptLines.length, welcomeMessage, "assistant: The transcript was cleared.");
 	} else {
 		transcriptLines.push(`you: ${trimmed}`);
 		transcriptLines.push(`assistant: I received ${trimmed.length} character(s).`);
@@ -186,12 +180,7 @@ renderTranscript();
 const resetButton = document.querySelector<HTMLButtonElement>("#reset-demo");
 
 resetButton?.addEventListener("click", () => {
-	transcriptLines.splice(
-		0,
-		transcriptLines.length,
-		"assistant: Welcome to the pi-tui browser demo.",
-		"assistant: Type a message and press Enter. Use /clear to reset the transcript.",
-	);
+	transcriptLines.splice(0, transcriptLines.length, welcomeMessage, defaultPrompt);
 	input.setValue("");
 	xterm.reset();
 	tui.requestRender(true);
