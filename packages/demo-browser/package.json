@@ -1,0 +1,21 @@
+{
+	"name": "@earendil-works/pi-demo-browser",
+	"version": "0.74.1",
+	"description": "Browser demo for pi-tui using xterm.js",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"@earendil-works/pi-tui": "workspace:*",
+		"@xterm/xterm": "^5.5.0"
+	},
+	"devDependencies": {
+		"vite": "^6.0.11",
+		"vite-plugin-node-polyfills": "^0.22.0",
+		"typescript": "^5.9.2"
+	}
+}
