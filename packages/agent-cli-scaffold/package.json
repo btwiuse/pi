@@ -1,0 +1,51 @@
+{
+  "name": "@earendil-works/pi-agent-cli-scaffold",
+  "version": "0.74.1",
+  "description": "Standalone scaffold CLI that runs pi in --no-builtin-tools mode",
+  "type": "module",
+  "bin": {
+    "pi-agent-scaffold": "dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "clean": "shx rm -rf dist",
+    "build": "tsgo -p tsconfig.build.json && shx chmod +x dist/cli.js",
+    "dev": "tsgo -p tsconfig.build.json --watch --preserveWatchOutput",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "dependencies": {
+    "@earendil-works/pi-coding-agent": "^0.74.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "shx": "^0.4.0",
+    "typescript": "^5.7.3"
+  },
+  "keywords": [
+    "agent",
+    "cli",
+    "scaffold",
+    "pi"
+  ],
+  "author": "Mario Zechner",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/earendil-works/pi-mono.git",
+    "directory": "packages/agent-cli-scaffold"
+  },
+  "engines": {
+    "node": ">=20.6.0"
+  }
+}
