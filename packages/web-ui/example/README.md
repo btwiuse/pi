@@ -16,6 +16,9 @@ npm run dev
 
 Open [http://localhost:5173](http://localhost:5173) in your browser.
 
+The example also includes a dedicated pi-tui browser demo at
+[http://localhost:5173/tui.html](http://localhost:5173/tui.html).
+
 ## What's Included
 
 This example demonstrates:
@@ -23,6 +26,7 @@ This example demonstrates:
 - **ChatPanel** - The main chat interface component
 - **System Prompt** - Custom configuration for the AI assistant
 - **Tools** - JavaScript REPL and artifacts tool
+- **pi-tui browser rendering** - A small `@earendil-works/pi-tui` app rendered through `@xterm/xterm`
 
 ## Configuration
 
@@ -47,8 +51,11 @@ API keys are stored in your browser's localStorage and never sent to any server 
 example/
 ├── src/
 │   ├── main.ts       # Main application entry point
-│   └── app.css       # Tailwind CSS configuration
+│   ├── app.css       # Tailwind CSS configuration
+│   ├── tui-demo.ts   # pi-tui + xterm browser demo
+│   └── tui-demo.css  # Styles for the browser demo
 ├── index.html        # HTML entry point
+├── tui.html          # Alternate HTML entry point for the TUI demo
 ├── package.json      # Dependencies
 ├── vite.config.ts    # Vite configuration
 └── tsconfig.json     # TypeScript configuration

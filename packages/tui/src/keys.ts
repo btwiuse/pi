@@ -1,3 +1,5 @@
+import { getEnv } from "./runtime.js";
+
 /**
  * Keyboard input handling for terminal applications.
  *
@@ -713,9 +715,7 @@ function matchesModifyOtherKeys(data: string, expectedKeycode: number, expectedM
 }
 
 function isWindowsTerminalSession(): boolean {
-	return (
-		Boolean(process.env.WT_SESSION) && !process.env.SSH_CONNECTION && !process.env.SSH_CLIENT && !process.env.SSH_TTY
-	);
+	return Boolean(getEnv("WT_SESSION")) && !getEnv("SSH_CONNECTION") && !getEnv("SSH_CLIENT") && !getEnv("SSH_TTY");
 }
 
 /**

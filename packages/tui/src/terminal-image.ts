@@ -1,3 +1,5 @@
+import { getEnv } from "./runtime.js";
+
 export type ImageProtocol = "kitty" | "iterm2" | null;
 
 export interface TerminalCapabilities {
@@ -40,33 +42,33 @@ export function setCellDimensions(dims: CellDimensions): void {
 }
 
 export function detectCapabilities(): TerminalCapabilities {
-	const termProgram = process.env.TERM_PROGRAM?.toLowerCase() || "";
-	const term = process.env.TERM?.toLowerCase() || "";
-	const colorTerm = process.env.COLORTERM?.toLowerCase() || "";
+	const termProgram = getEnv("TERM_PROGRAM")?.toLowerCase() || "";
+	const term = getEnv("TERM")?.toLowerCase() || "";
+	const colorTerm = getEnv("COLORTERM")?.toLowerCase() || "";
 
 	// tmux and screen swallow OSC 8 by default (passthrough is opt-in and wraps
 	// sequences differently). Force hyperlinks off whenever we detect them, even
 	// when the outer terminal would otherwise support OSC 8. Image protocols are
 	// also unreliable under tmux/screen, so leave `images: null` for safety.
-	const inTmuxOrScreen = !!process.env.TMUX || term.startsWith("tmux") || term.startsWith("screen");
+	const inTmuxOrScreen = Boolean(getEnv("TMUX")) || term.startsWith("tmux") || term.startsWith("screen");
 	if (inTmuxOrScreen) {
 		const trueColor = colorTerm === "truecolor" || colorTerm === "24bit";
 		return { images: null, trueColor, hyperlinks: false };
 	}
 
-	if (process.env.KITTY_WINDOW_ID || termProgram === "kitty") {
+	if (getEnv("KITTY_WINDOW_ID") || termProgram === "kitty") {
 		return { images: "kitty", trueColor: true, hyperlinks: true };
 	}
 
-	if (termProgram === "ghostty" || term.includes("ghostty") || process.env.GHOSTTY_RESOURCES_DIR) {
+	if (termProgram === "ghostty" || term.includes("ghostty") || getEnv("GHOSTTY_RESOURCES_DIR")) {
 		return { images: "kitty", trueColor: true, hyperlinks: true };
 	}
 
-	if (process.env.WEZTERM_PANE || termProgram === "wezterm") {
+	if (getEnv("WEZTERM_PANE") || termProgram === "wezterm") {
 		return { images: "kitty", trueColor: true, hyperlinks: true };
 	}
 
-	if (process.env.ITERM_SESSION_ID || termProgram === "iterm.app") {
+	if (getEnv("ITERM_SESSION_ID") || termProgram === "iterm.app") {
 		return { images: "iterm2", trueColor: true, hyperlinks: true };
 	}
 

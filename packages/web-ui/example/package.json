@@ -13,7 +13,9 @@
   "dependencies": {
     "@mariozechner/mini-lit": "^0.2.0",
     "@earendil-works/pi-ai": "file:../../ai",
+    "@earendil-works/pi-tui": "file:../../tui",
     "@earendil-works/pi-web-ui": "file:../",
+    "@xterm/xterm": "^5.5.0",
     "lit": "^3.3.1",
     "lucide": "^0.544.0"
   },
