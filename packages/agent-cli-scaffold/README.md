@@ -13,7 +13,7 @@ npm install -g @earendil-works/pi-agent-cli-scaffold
 ## Usage
 
 ```bash
-pi-agent-scaffold
+pi-scaffold
 ```
 
 This command is equivalent to running:
@@ -25,5 +25,5 @@ pi --no-builtin-tools
 All regular pi CLI flags still work and can override tool selection, for example:
 
 ```bash
-pi-agent-scaffold --tools read,bash -p "Inspect this repo"
+pi-scaffold --tools read,bash -p "Inspect this repo"
 ```
